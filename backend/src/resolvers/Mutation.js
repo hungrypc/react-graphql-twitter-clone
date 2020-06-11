@@ -25,9 +25,16 @@ const Mutation = {
     }
   },
   async createUser(parent, args, { prisma }, info) {
+    // check if email taken
     const emailTaken = await prisma.exists.User({ email: args.data.email })
     if (emailTaken) {
       throw new Error('Email taken')
+    }
+
+    // check if username taken
+    const usernameTaken = await prisma.exists.User({ username: args.data.username })
+    if (usernameTaken) {
+      throw new Error('Username taken')
     }
 
     const password = await hashPassword(args.data.password)
@@ -35,7 +42,8 @@ const Mutation = {
     const user = await prisma.mutation.createUser({
       data: {
         ...args.data,
-        password
+        password,
+        public: true
       }
     })
 
