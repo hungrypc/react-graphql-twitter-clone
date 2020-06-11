@@ -3,6 +3,8 @@
 type Query {
   users(query: String, first: Int, skip: Int, after: String, orderBy: UserOrderByInput): [User!]!
   me: User!
+  tweets: [Tweet!]!
+  tweet: Tweet
 }
 
 type Mutation {
@@ -10,16 +12,17 @@ type Mutation {
   createUser(data: CreateUserInput!): AuthPayload!
   deleteUser: User!
   updateUser(data: UpdateUserInput!): User!
+  createTweet(data: CreateTweetInput!): Tweet!
+  deleteTweet(id: ID!): Tweet!
 }
+
+
+#           USER
 
 type AuthPayload {
   token: String!
   user: User!
 }
-
-# type Subscription {
-
-# }
 
 input LoginUserInput {
   email: String!
@@ -48,8 +51,24 @@ type User {
   username: String!
   password: String!
   public: Boolean!
+  tweets: [Tweet!]!
   updatedAt: String!
   createdAt: String! 
+}
+
+
+#           TWEET
+
+input CreateTweetInput {
+  text: String!
+}
+
+type Tweet {
+  id: ID!
+  text: String!
+  author: User!
+  createdAt: String!
+  updatedAt: String!
 }
 
 enum MutationType {
@@ -57,3 +76,8 @@ enum MutationType {
   UPDATED
   DELETED
 }
+
+
+# type Subscription {
+
+# }

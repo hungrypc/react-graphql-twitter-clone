@@ -1,5 +1,9 @@
 # source: http://localhost:4466/twitter/dev
-# timestamp: Thu Jun 11 2020 16:25:07 GMT-0400 (Eastern Daylight Time)
+# timestamp: Thu Jun 11 2020 16:55:53 GMT-0400 (Eastern Daylight Time)
+
+type AggregateTweet {
+  count: Int!
+}
 
 type AggregateUser {
   count: Int!
@@ -23,11 +27,17 @@ scalar Long
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  createTweet(data: TweetCreateInput!): Tweet!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateTweet(data: TweetUpdateInput!, where: TweetWhereUniqueInput!): Tweet
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteTweet(where: TweetWhereUniqueInput!): Tweet
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertTweet(where: TweetWhereUniqueInput!, create: TweetCreateInput!, update: TweetUpdateInput!): Tweet!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyTweets(data: TweetUpdateManyMutationInput!, where: TweetWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyTweets(where: TweetWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
@@ -64,8 +74,11 @@ enum PrismaDatabase {
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  tweets(where: TweetWhereInput, orderBy: TweetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tweet]!
   user(where: UserWhereUniqueInput!): User
+  tweet(where: TweetWhereUniqueInput!): Tweet
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  tweetsConnection(where: TweetWhereInput, orderBy: TweetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TweetConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -76,6 +89,427 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  tweet(where: TweetSubscriptionWhereInput): TweetSubscriptionPayload
+}
+
+type Tweet implements Node {
+  id: ID!
+  text: String!
+  author: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type TweetConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TweetEdge]!
+  aggregate: AggregateTweet!
+}
+
+input TweetCreateInput {
+  id: ID
+  text: String!
+  author: UserCreateOneWithoutTweetsInput!
+}
+
+input TweetCreateManyWithoutAuthorInput {
+  create: [TweetCreateWithoutAuthorInput!]
+  connect: [TweetWhereUniqueInput!]
+}
+
+input TweetCreateWithoutAuthorInput {
+  id: ID
+  text: String!
+}
+
+"""An edge in a connection."""
+type TweetEdge {
+  """The item at the end of the edge."""
+  node: Tweet!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum TweetOrderByInput {
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type TweetPreviousValues {
+  id: ID!
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input TweetScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TweetScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TweetScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TweetScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+}
+
+type TweetSubscriptionPayload {
+  mutation: MutationType!
+  node: Tweet
+  updatedFields: [String!]
+  previousValues: TweetPreviousValues
+}
+
+input TweetSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TweetSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TweetSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TweetSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: TweetWhereInput
+}
+
+input TweetUpdateInput {
+  text: String
+  author: UserUpdateOneRequiredWithoutTweetsInput
+}
+
+input TweetUpdateManyDataInput {
+  text: String
+}
+
+input TweetUpdateManyMutationInput {
+  text: String
+}
+
+input TweetUpdateManyWithoutAuthorInput {
+  create: [TweetCreateWithoutAuthorInput!]
+  connect: [TweetWhereUniqueInput!]
+  set: [TweetWhereUniqueInput!]
+  disconnect: [TweetWhereUniqueInput!]
+  delete: [TweetWhereUniqueInput!]
+  update: [TweetUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [TweetUpdateManyWithWhereNestedInput!]
+  deleteMany: [TweetScalarWhereInput!]
+  upsert: [TweetUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input TweetUpdateManyWithWhereNestedInput {
+  where: TweetScalarWhereInput!
+  data: TweetUpdateManyDataInput!
+}
+
+input TweetUpdateWithoutAuthorDataInput {
+  text: String
+}
+
+input TweetUpdateWithWhereUniqueWithoutAuthorInput {
+  where: TweetWhereUniqueInput!
+  data: TweetUpdateWithoutAuthorDataInput!
+}
+
+input TweetUpsertWithWhereUniqueWithoutAuthorInput {
+  where: TweetWhereUniqueInput!
+  update: TweetUpdateWithoutAuthorDataInput!
+  create: TweetCreateWithoutAuthorInput!
+}
+
+input TweetWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TweetWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TweetWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TweetWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  author: UserWhereInput
+}
+
+input TweetWhereUniqueInput {
+  id: ID
 }
 
 type User implements Node {
@@ -85,6 +519,7 @@ type User implements Node {
   username: String!
   public: Boolean!
   password: String!
+  tweets(where: TweetWhereInput, orderBy: TweetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tweet!]
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -100,6 +535,21 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
+  name: String!
+  email: String!
+  username: String!
+  public: Boolean!
+  password: String!
+  tweets: TweetCreateManyWithoutAuthorInput
+}
+
+input UserCreateOneWithoutTweetsInput {
+  create: UserCreateWithoutTweetsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutTweetsInput {
   id: ID
   name: String!
   email: String!
@@ -192,6 +642,7 @@ input UserUpdateInput {
   username: String
   public: Boolean
   password: String
+  tweets: TweetUpdateManyWithoutAuthorInput
 }
 
 input UserUpdateManyMutationInput {
@@ -200,6 +651,26 @@ input UserUpdateManyMutationInput {
   username: String
   public: Boolean
   password: String
+}
+
+input UserUpdateOneRequiredWithoutTweetsInput {
+  create: UserCreateWithoutTweetsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutTweetsDataInput
+  upsert: UserUpsertWithoutTweetsInput
+}
+
+input UserUpdateWithoutTweetsDataInput {
+  name: String
+  email: String
+  username: String
+  public: Boolean
+  password: String
+}
+
+input UserUpsertWithoutTweetsInput {
+  update: UserUpdateWithoutTweetsDataInput!
+  create: UserCreateWithoutTweetsInput!
 }
 
 input UserWhereInput {
@@ -459,6 +930,9 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  tweets_every: TweetWhereInput
+  tweets_some: TweetWhereInput
+  tweets_none: TweetWhereInput
 }
 
 input UserWhereUniqueInput {

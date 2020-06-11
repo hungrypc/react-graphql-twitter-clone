@@ -80,7 +80,39 @@ const Mutation = {
       data: args.data
     }, info)
   },
+  async createTweet(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request)
 
+    return await prisma.mutation.createTweet({
+      data: {
+        text: args.data.text,
+        author: {
+          connect: {
+            id: userId
+          }
+        }
+      }
+    }, info)
+  },
+  async deleteTweet(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request)
+    const tweetExists = await prisma.exists.Tweet({
+      id: args.id,
+      author: {
+        id: userId
+      }
+    })
+
+    if (!tweetExists) {
+      throw new Error('Unable to delete tweet')
+    }
+
+    return await prisma.mutation.deleteTweet({
+      where: {
+        id: args.id
+      }
+    }, info)
+  }
 }
 
 export { Mutation as default }

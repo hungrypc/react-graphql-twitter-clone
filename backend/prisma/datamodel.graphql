@@ -5,6 +5,15 @@ type User {
   username: String! @unique
   public: Boolean!
   password: String!
+  tweets: [Tweet!]! @relation(name: "TweetToUser", onDelete: CASCADE)
   updatedAt: DateTime! @updatedAt
   createdAt: DateTime! @createdAt
+}
+
+type Tweet {
+  id: ID! @id
+  text: String!
+  author: User! @relation(name: "TweetToUser", onDelete: SET_NULL)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }

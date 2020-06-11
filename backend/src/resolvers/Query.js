@@ -28,6 +28,36 @@ const Query = {
       }
     })
   },
+  tweets(parent, args, { prisma }, info) {
+    const opArgs = {
+      where: {
+        author: {
+          public: true
+        }
+      },
+      orderBy: 'createdAt_DESC'
+    }
+
+    return prisma.query.tweets(opArgs, info)
+  },
+  async tweet(parent, args, { prisma, request }, info) {
+    const getTweet = await prisma.query.tweets({
+      where: {
+        id: args.id,
+        OR: [{
+          author: {
+            public: true
+          }
+        }]
+      }
+    }, info)
+
+    if (getTweet.length === 0) {
+      throw new Error('Tweet not found')
+    }
+
+    return getTweet[0]
+  }
 }
 
 export { Query as default }
