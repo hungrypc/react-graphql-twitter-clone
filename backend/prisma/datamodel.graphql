@@ -6,6 +6,10 @@ type User {
   public: Boolean!
   password: String!
   tweets: [Tweet!]! @relation(name: "TweetToUser", onDelete: CASCADE)
+
+  followers: [User!]! @relation(name: "UserToUser", onDelete: SET_NULL)
+  following: [User!]! @relation(name: "UserToUser", onDelete: SET_NULL)
+  
   updatedAt: DateTime! @updatedAt
   createdAt: DateTime! @createdAt
 }

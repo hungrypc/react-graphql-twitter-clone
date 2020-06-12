@@ -14,6 +14,8 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User!
   createTweet(data: CreateTweetInput!): Tweet!
   deleteTweet(id: ID!): Tweet!
+  followUser(id: ID!): User!
+  unfollowUser(id: ID!): User!
 }
 
 
@@ -52,9 +54,12 @@ type User {
   password: String!
   public: Boolean!
   tweets: [Tweet!]!
+  followers: [User!]!
+  following: [User!]!
   updatedAt: String!
   createdAt: String! 
 }
+
 
 
 #           TWEET
