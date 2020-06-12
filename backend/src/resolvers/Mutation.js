@@ -112,6 +112,31 @@ const Mutation = {
         id: args.id
       }
     }, info)
+  },
+  async followUser(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request)
+
+    const toBeFollowedExists = await prisma.exists.User({
+      id: args.id
+      // figure out how to allow followers if account private
+    })
+
+    if (!toBeFollowedExists) {
+      throw new Error('Unable to follow user')
+    }
+
+    return await prisma.mutation.updateUser({
+      where: {
+        id: userId
+      },
+      data: {
+        following: {
+          connect: {
+            id: args.id
+          }
+        }
+      }
+    }, info)
   }
 }
 
