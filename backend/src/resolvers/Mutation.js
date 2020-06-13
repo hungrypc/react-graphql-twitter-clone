@@ -137,7 +137,32 @@ const Mutation = {
         }
       }
     }, info)
+  },
+  async unfollowUser(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request)
+
+    const toBeUnfollowedExists = await prisma.exists.User({
+      id: args.id
+    })
+
+    if (!toBeUnfollowedExists) {
+      throw new Error('Unable to unfollow')
+    }
+
+    return await prisma.mutation.updateUser({
+      where: {
+        id: userId
+      },
+      data: {
+        following: {
+          disconnect: {
+            id: args.id
+          }
+        }
+      }
+    }, info)
   }
+  
 }
 
 export { Mutation as default }
