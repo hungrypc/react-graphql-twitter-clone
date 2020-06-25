@@ -1,6 +1,8 @@
 import {
   SIGN_IN,
   SIGN_OUT,
+  ME,
+  NO_TOKEN
 } from './types'
 
 
@@ -60,26 +62,45 @@ export const me = () => {
   return async (dispatch) => {
     const token = localStorage.getItem('auth_token')
 
-    if (!token) {
-      throw new Error('log in first')
+    if (token) {
+      await fetch(api, {
+        ...opt(token),
+        body: JSON.stringify({
+          query: `query {
+            me {
+              id
+              name
+              username
+              public
+              email
+              followers {
+                id
+                name
+              }
+              following {
+                id
+                name
+              }
+            }
+          }`,
+        }),
+      })
+      .then(res => res.json())
+      .then(resJson => {
+        dispatch({
+          type: ME,
+          payload: resJson.data.me
+        })
+        // console.log(resJson)
+      })
+      .catch(console.error);
+      
+    } else {
+      console.log('no token')
+      dispatch({
+        type: NO_TOKEN
+      })
     }
 
-    await fetch(api, {
-      ...opt(token),
-      body: JSON.stringify({
-        query: `query {
-          me {
-            id
-            name
-            username
-            public
-            email
-          }
-        }`,
-      }),
-    })
-    .then(res => res.json())
-    .then(console.log)
-    .catch(console.error);
   }
 }

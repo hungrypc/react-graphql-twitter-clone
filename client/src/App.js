@@ -3,6 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 
 import Explore from './pages/Explore'
 import Auth from './pages/Auth'
+import Home from './pages/Home'
 
 import history from './modules/history'
 
@@ -18,6 +19,7 @@ function App() {
         <Switch>
           <Route path="/" component={Explore} exact />
           <Route path="/login" component={Auth} exact />
+          <Route path="/home" component={Home} exact />
         </Switch>
       </div>
     </Router>

@@ -26,7 +26,7 @@ const Query = {
       where: {
         id: userId
       }
-    })
+    }, info)
   },
   tweets(parent, args, { prisma }, info) {
     const opArgs = {
