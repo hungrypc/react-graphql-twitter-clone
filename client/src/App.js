@@ -9,6 +9,8 @@ import history from './modules/history'
 import './style/css/App.css';
 require('dotenv').config()
 
+// console.log(process.env.REACT_APP_API_URL)
+
 function App() {
   return (
     <Router history={history}>
