@@ -1,10 +1,8 @@
 import {
-  SIGN_IN,
-  SIGN_OUT,
-  ME,
-  NO_TOKEN
+  SIGN_IN, SIGN_OUT, ME,
+  NO_TOKEN,
+  GET_PROFILE_DATA
 } from './types'
-
 
 const api = process.env.REACT_APP_API_URL
 const opt = (token = process.env.REACT_APP_PRISMA_TOKEN) => {
@@ -17,12 +15,16 @@ const opt = (token = process.env.REACT_APP_PRISMA_TOKEN) => {
   }
 }
 
+
+
+/////////////////////////// AUTH ///////////////////////////
+
 export const login = (username, password) => {
   return async (dispatch) => {
     await fetch(api, {
-        ...opt(),
-        body: JSON.stringify({
-          query: `mutation { 
+      ...opt(),
+      body: JSON.stringify({
+        query: `mutation { 
             login(
               data: {
                 username: "${username}",
@@ -38,8 +40,8 @@ export const login = (username, password) => {
               } 
             } 
           }`,
-        }),
-      })
+      }),
+    })
       .then(res => res.json())
       .then(resJson => {
         if (resJson.errors) {
@@ -85,22 +87,64 @@ export const me = () => {
           }`,
         }),
       })
-      .then(res => res.json())
-      .then(resJson => {
-        dispatch({
-          type: ME,
-          payload: resJson.data.me
+        .then(res => res.json())
+        .then(resJson => {
+          dispatch({
+            type: ME,
+            payload: resJson.data.me
+          })
+          // console.log(resJson)
         })
-        // console.log(resJson)
-      })
-      .catch(console.error);
-      
+        .catch(console.error);
+
     } else {
       console.log('no token')
       dispatch({
         type: NO_TOKEN
       })
     }
+  }
+}
 
+
+/////////////////////////// USER ///////////////////////////
+
+export const getUserProfileData = (username) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem('auth_token')
+    await fetch(api, {
+      ...opt(token),
+      body: JSON.stringify({
+        query: `query {
+          user (
+            username: "${username}"
+          ) {
+            id
+            name
+            username
+            public
+            followers {
+              id
+              name
+            }
+            following {
+              id
+              name
+            }
+          }
+        }`,
+      }),
+    })
+    .then(res => res.json())
+    .then(resJson => {
+
+      console.log(resJson)
+      dispatch({
+        type: GET_PROFILE_DATA,
+        payload: resJson.data.user
+      })
+      // console.log(resJson)
+    })
+    .catch(console.error);
   }
 }

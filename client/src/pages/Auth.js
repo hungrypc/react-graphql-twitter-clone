@@ -33,7 +33,7 @@ function Auth(props) {
       return (
         <div className="login">
           <div className="login__container">
-            <form>
+            <form onSubmit={() => submitHandler()}>
               <label htmlFor="username">Username</label>
               <input type="text" name="username" autoComplete="off"
                 onChange={e => setUsername(e.target.value)}
