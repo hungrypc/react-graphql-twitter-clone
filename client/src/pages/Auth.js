@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { login, getUsers } from '../modules/actions'
+import { login, me } from '../modules/actions'
 
 function Auth(props) {
   const [username, setUsername] = useState('')
@@ -12,7 +12,7 @@ function Auth(props) {
   }
 
   const test = () => {
-    props.getUsers()
+    props.me()
   }
 
   return (
@@ -43,5 +43,5 @@ function Auth(props) {
 }
 
 export default connect(null, {
-  login, getUsers
+  login, me
 })(Auth)

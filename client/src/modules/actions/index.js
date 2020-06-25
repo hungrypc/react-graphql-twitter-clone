@@ -1,33 +1,30 @@
-import { GraphQLClient } from 'graphql-request'
-import gql from 'graphql-tag';
 import {
   SIGN_IN,
   SIGN_OUT,
 } from './types'
 
-const graphQLClient = new GraphQLClient(process.env.REACT_APP_API_URL, {
-  headers: {
-    authorization: `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`,
-  },
-})
 
 const api = process.env.REACT_APP_API_URL
+const opt = (token = process.env.REACT_APP_PRISMA_TOKEN) => {
+  return {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  }
+}
 
 export const login = (username, password) => {
   return async (dispatch) => {
-    
     await fetch(api, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`
-        },
+        ...opt(),
         body: JSON.stringify({
           query: `mutation { 
             login(
               data: {
-                username: ${username},
-                password: ${password}
+                username: "${username}",
+                password: "${password}"
               }
             ) { 
               token
@@ -35,62 +32,54 @@ export const login = (username, password) => {
                 id
                 name
                 email
+                username
               } 
             } 
           }`,
         }),
       })
-      .then(response => {
-        console.log(response.json())
-      })
-    
-    
-    // const mutation = gql`mutation { 
-    //   login(
-    //     data: {
-    //       username: ${username},
-    //       password: ${password}
-    //     }
-    //   ) { 
-    //     token
-    //     user {
-    //       id
-    //       name
-    //       email
-    //     } 
-    //   } 
-    // }`
+      .then(res => res.json())
+      .then(resJson => {
+        if (resJson.errors) {
+          console.log('errors', resJson.errors)
+        }
 
-    // const data = await graphQLClient.request(mutation)
-    // console.log(JSON.stringify(data))
+        const { token, user } = resJson.data.login
+        localStorage.setItem('auth_token', token)
+
+        dispatch({
+          type: SIGN_IN,
+          payload: user
+        })
+      })
+      .catch(console.error);
   }
 }
 
-export const getUsers = () => {
+export const me = () => {
   return async (dispatch) => {
+    const token = localStorage.getItem('auth_token')
+
+    if (!token) {
+      throw new Error('log in first')
+    }
+
     await fetch(api, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`
-      },
+      ...opt(token),
       body: JSON.stringify({
         query: `query {
-          users {
+          me {
             id
             name
             username
             public
+            email
           }
         }`,
       }),
     })
-    .then(response => {
-      console.log(response)
-      const jsonResponse = response.data
-
-      console.log(jsonResponse)
-    })
-
+    .then(res => res.json())
+    .then(console.log)
+    .catch(console.error);
   }
 }
