@@ -1,0 +1,16 @@
+// nav
+@import './navbar.scss';
+
+
+main {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .page {
+    width: 990px;
+  }
+}

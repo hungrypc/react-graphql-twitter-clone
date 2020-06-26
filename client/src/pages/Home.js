@@ -17,7 +17,7 @@ function Home(props) {
   }, [props.isSignedIn])
   
   return (
-    <div>
+    <div className="page">
       Home
     </div>
   )

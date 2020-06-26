@@ -10,7 +10,7 @@ function Profile(props) {
   }, [])
 
   return (
-    <div>
+    <div className="page">
       <h1>{props.user.data.name}</h1>
     </div>
   )

@@ -6,30 +6,25 @@
   justify-content: flex-end;
   flex-direction: row;
   min-height: 0px;
-  min-width: 0px; }
-  .navbar__container {
+  min-width: 0px;
+  
+  &__container {
     width: 275px;
     display: flex;
     flex-basis: auto;
     flex-direction: column;
-    flex-shrink: 0;
+    flex-shrink: 0;    
     min-height: 0px;
     min-width: 0px;
-    position: relative; }
-  .navbar__nav {
+    position: relative;    
+  }
+  
+  &__nav {
     background-color: azure;
     height: 100%;
     top: 0;
     position: fixed;
     display: flex;
-    flex-basis: auto; }
-
-main {
-  display: flex;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
-  flex-direction: column;
-  align-items: flex-start; }
-  main .page {
-    width: 990px; }
+    flex-basis: auto;
+  }
+}
