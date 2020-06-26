@@ -2,6 +2,7 @@
 
 type Query {
   users(query: String, first: Int, skip: Int, after: String, orderBy: UserOrderByInput): [User!]!
+  user(username: String!): User
   me: User!
   tweets: [Tweet!]!
   tweet: Tweet

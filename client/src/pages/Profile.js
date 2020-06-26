@@ -5,33 +5,20 @@ import { getUserProfileData } from '../modules/actions'
 
 function Profile(props) {
 
-  console.log(props.match.params.username)
   useEffect(() => {
-    if(!props.userProfileData.user) {
-      props.getUserProfileData(props.match.params.username)
-    }
-  }, [props.userProfileData.user])
-
-  const renderProfile = () => {
-    if (!props.userProfileData.user.username) {
-      return <div>user does not exist</div>
-    } else {
-        return (
-          <h1>{props.userProfile.user.username}</h1>
-        )
-    }
-  }
+    props.getUserProfileData(props.match.params.username)
+  }, [])
 
   return (
     <div>
-      {renderProfile()}
+      <h1>{props.user.data.name}</h1>
     </div>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    userProfileData: state.userProfileData
+    user: state.userProfileData
   }
 }
 

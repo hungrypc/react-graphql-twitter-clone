@@ -3,6 +3,7 @@ import {
   NO_TOKEN,
   GET_PROFILE_DATA
 } from './types'
+import { render } from 'react-dom'
 
 const api = process.env.REACT_APP_API_URL
 const opt = (token = process.env.REACT_APP_PRISMA_TOKEN) => {
@@ -137,13 +138,15 @@ export const getUserProfileData = (username) => {
     })
     .then(res => res.json())
     .then(resJson => {
-
       console.log(resJson)
-      dispatch({
-        type: GET_PROFILE_DATA,
-        payload: resJson.data.user
-      })
-      // console.log(resJson)
+      if (resJson.errors) {
+        throw new Error('user not found')  
+      } else {
+        dispatch({
+          type: GET_PROFILE_DATA,
+          payload: resJson.data.user
+        })
+      }
     })
     .catch(console.error);
   }

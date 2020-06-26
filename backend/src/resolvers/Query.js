@@ -19,6 +19,19 @@ const Query = {
 
     return prisma.query.users(opArgs, info)
   },
+  async user(parent, args, { prisma }, info) {
+    const user = await prisma.query.user({
+      where: {
+        username: args.username
+      }
+    }, info)
+
+    if (!user) {
+      throw new Error('User does not exist')
+    }
+
+    return user
+  },
   async me(parent, args, { prisma, request }, info) {
     const userId = getUserId(request)
 
