@@ -18,7 +18,29 @@ function Profile(props) {
             {props.user.data.tweets.length} Tweets
           </div>
         </div>
-        <div className="profile__info"></div>
+        <div className="profile__info">
+          <div className="profile__info--banner"></div>
+          <div className="profile__info--dp">
+            <div></div>
+          </div>
+          <div className="profile__info--user">
+            <div className="profile__info--user-name">
+              {props.user.data.name}
+            </div>
+            <div className="profile__info--user-username">
+              @{props.user.data.username}
+            </div>
+            <div className="profile__info--user-follow">
+              <div className="profile__info--user-follow-following">
+                <span>{props.user.data.following.length}</span>
+              </div>
+              <div className="profile__info--user-follow-followers">
+                <span>{props.user.data.followers.length}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="profile__filter"></div>
         <div className="profile__tweets"></div>
       </div>
       <div className="sidebar"></div>

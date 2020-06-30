@@ -33,7 +33,7 @@ a {
   border-right: solid 1px #4b4f52;
   color: #eee; }
   .navbar__container {
-    width: 275px;
+    width: 265px;
     display: flex;
     flex-basis: auto;
     flex-direction: column;
@@ -83,6 +83,25 @@ a {
   grid-template-rows: 53px 380px 53px auto; }
   .profile__header {
     border-bottom: solid 1px #4b4f52; }
+  .profile__info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: relative; }
+    .profile__info--banner {
+      height: 200px;
+      background-color: #e1e1e1; }
+    .profile__info--dp {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 15px; }
+      .profile__info--dp div {
+        margin-top: -15%;
+        height: 134px;
+        width: 134px;
+        border-radius: 50%;
+        background-color: azure; }
 
 .sidebar {
   height: 100%;
