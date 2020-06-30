@@ -18,7 +18,8 @@ function Home(props) {
   
   return (
     <div className="page">
-      Home
+      <div className="home"></div>
+      <div className="sidebar"></div>
     </div>
   )
 }

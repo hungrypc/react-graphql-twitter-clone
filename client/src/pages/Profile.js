@@ -11,7 +11,17 @@ function Profile(props) {
 
   return (
     <div className="page">
-      <h1>{props.user.data.name}</h1>
+      <div className="profile">
+        <div className="profile__header">
+          <div className="profile__header--username">{props.user.data.name}</div>
+          <div className="profile__header--tweetcount">
+            {props.user.data.tweets.length} Tweets
+          </div>
+        </div>
+        <div className="profile__info"></div>
+        <div className="profile__tweets"></div>
+      </div>
+      <div className="sidebar"></div>
     </div>
   )
 }

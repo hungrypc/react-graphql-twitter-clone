@@ -3,7 +3,6 @@ import {
   NO_TOKEN,
   GET_PROFILE_DATA
 } from './types'
-import { render } from 'react-dom'
 
 const api = process.env.REACT_APP_API_URL
 const opt = (token = process.env.REACT_APP_PRISMA_TOKEN) => {
@@ -131,6 +130,10 @@ export const getUserProfileData = (username) => {
             following {
               id
               name
+            }
+            tweets {
+              text
+              createdAt
             }
           }
         }`,

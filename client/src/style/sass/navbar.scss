@@ -1,3 +1,5 @@
+$main-color: #eee;
+
 .navbar {
   display: flex;
   flex-grow: 1;
@@ -7,6 +9,8 @@
   flex-direction: row;
   min-height: 0px;
   min-width: 0px;
+  border-right: solid 1px #4b4f52;
+  color: $main-color;
   
   &__container {
     width: 275px;
@@ -19,12 +23,64 @@
     position: relative;    
   }
   
-  &__nav {
-    background-color: azure;
+
+  &__nav { 
+    width: 250px;
     height: 100%;
     top: 0;
     position: fixed;
     display: flex;
     flex-basis: auto;
+    padding: 10px;
+    justify-content: space-between;
+
+    &-container {
+      height: 635px;
+      margin-top: 10px;
+    }
+
+    &--loc {
+      height: 100%;
+      margin-top: 15px;
+      // display: flex;
+      // flex-direction: column;
+      // justify-content: space-between
+    }
+  
+
+    &-link {
+      font-weight: 800;
+      line-height: 1.3125;
+      font-size: 21px;
+      padding: 7px 0;
+      width: 100%;
+
+      &--a {
+        max-width: max-content;
+        padding: 10px;
+        border-radius: 20px;
+        transition: all .2s ease;
+
+        span {
+          margin-left: 10px;
+        }
+
+        &:hover {
+          background-color: azure;
+          
+        }
+      }
+    }
+
+  }
+
+}
+
+.nav--logo {
+  height: 2rem;
+  margin-left: 10px;
+
+  div{
+    font-size: 30px;
   }
 }

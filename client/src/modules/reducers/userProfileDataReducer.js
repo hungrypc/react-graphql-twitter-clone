@@ -2,7 +2,13 @@ import { GET_PROFILE_DATA } from '../actions/types';
 
 const INITIAL_STATE = {
   data: {
-    name: ''
+    id: null,
+    name: '',
+    username: '',
+    public: null,
+    followers: [],
+    following: [],
+    tweets: []
   }
 };
 

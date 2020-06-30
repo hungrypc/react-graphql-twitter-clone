@@ -1,3 +1,26 @@
+.App {
+  background-color: #111;
+  height: 100vh;
+  width: 100vw; }
+
+main {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #eee; }
+  main .page {
+    width: 990px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 600px 1fr; }
+
+a {
+  text-decoration: none !important;
+  color: #eee; }
+
 .navbar {
   display: flex;
   flex-grow: 1;
@@ -6,7 +29,9 @@
   justify-content: flex-end;
   flex-direction: row;
   min-height: 0px;
-  min-width: 0px; }
+  min-width: 0px;
+  border-right: solid 1px #4b4f52;
+  color: #eee; }
   .navbar__container {
     width: 275px;
     display: flex;
@@ -17,19 +42,50 @@
     min-width: 0px;
     position: relative; }
   .navbar__nav {
-    background-color: azure;
+    width: 250px;
     height: 100%;
     top: 0;
     position: fixed;
     display: flex;
-    flex-basis: auto; }
+    flex-basis: auto;
+    padding: 10px;
+    justify-content: space-between; }
+    .navbar__nav-container {
+      height: 635px;
+      margin-top: 10px; }
+    .navbar__nav--loc {
+      height: 100%;
+      margin-top: 15px; }
+    .navbar__nav-link {
+      font-weight: 800;
+      line-height: 1.3125;
+      font-size: 21px;
+      padding: 7px 0;
+      width: 100%; }
+      .navbar__nav-link--a {
+        max-width: max-content;
+        padding: 10px;
+        border-radius: 20px;
+        transition: all .2s ease; }
+        .navbar__nav-link--a span {
+          margin-left: 10px; }
+        .navbar__nav-link--a:hover {
+          background-color: azure; }
 
-main {
+.nav--logo {
+  height: 2rem;
+  margin-left: 10px; }
+  .nav--logo div {
+    font-size: 30px; }
+
+.profile {
+  display: grid;
+  grid-template-rows: 53px 380px 53px auto; }
+  .profile__header {
+    border-bottom: solid 1px #4b4f52; }
+
+.sidebar {
+  height: 100%;
   display: flex;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
   flex-direction: column;
-  align-items: flex-start; }
-  main .page {
-    width: 990px; }
+  border-left: solid 1px #4b4f52; }

@@ -1,0 +1,8 @@
+.profile {
+  display: grid;
+  grid-template-rows: 53px 380px 53px auto;
+
+  &__header {
+    border-bottom: solid 1px #4b4f52;
+  }
+}
