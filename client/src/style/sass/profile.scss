@@ -19,6 +19,7 @@
     }
 
     &--dp {
+      height: 38px;
       display: flex;
       flex-wrap: wrap;
       padding: 15px;
@@ -29,6 +30,79 @@
         height: 134px;
         width: 134px;
         border-radius: 50%;
+        background-color: azure;
+      }
+    }
+
+    &--user {
+      padding: 0 15px;
+
+      &-name {
+        font-size: 21px;
+        font-weight: 800;
+      }
+
+      &-username {
+        font-size: 15px;
+        color: rgb(136, 153, 166);
+      }
+
+      &-createdAt {
+        margin: 10px 0;
+        font-size: 15px;
+        color: rgb(136, 153, 166);
+      }
+
+      &-follow {
+        display: flex; 
+        flex-direction: row;
+
+        &-container {
+          display: flex;
+          flex-direction: row;
+          margin-right: 15px;
+          font-size: 15px;
+          cursor: pointer;
+
+          span {
+            margin-right: 5px;
+            color: rgb(136, 153, 166);
+          }
+
+          .follow-count {
+            font-weight: 800;
+            color: #eee;
+          }
+
+          &:hover span {
+            text-decoration-line: underline;            
+          }
+        }
+      }
+    }
+  }
+
+  &__filter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex-shrink: 1;
+    flex-grow: 1;
+    height: 100%;
+    border-bottom: solid 1px #4b4f52;
+
+    &--item {
+      display: flex;
+      flex-grow: 1;
+      padding: 15px;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
         background-color: azure;
       }
     }

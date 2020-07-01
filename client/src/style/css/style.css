@@ -65,7 +65,7 @@ a {
       .navbar__nav-link--a {
         max-width: max-content;
         padding: 10px;
-        border-radius: 20px;
+        border-radius: 25px;
         transition: all .2s ease; }
         .navbar__nav-link--a span {
           margin-left: 10px; }
@@ -93,6 +93,7 @@ a {
       height: 200px;
       background-color: #e1e1e1; }
     .profile__info--dp {
+      height: 38px;
       display: flex;
       flex-wrap: wrap;
       padding: 15px; }
@@ -101,6 +102,55 @@ a {
         height: 134px;
         width: 134px;
         border-radius: 50%;
+        background-color: azure; }
+    .profile__info--user {
+      padding: 0 15px; }
+      .profile__info--user-name {
+        font-size: 21px;
+        font-weight: 800; }
+      .profile__info--user-username {
+        font-size: 15px;
+        color: #8899a6; }
+      .profile__info--user-createdAt {
+        margin: 10px 0;
+        font-size: 15px;
+        color: #8899a6; }
+      .profile__info--user-follow {
+        display: flex;
+        flex-direction: row; }
+        .profile__info--user-follow-container {
+          display: flex;
+          flex-direction: row;
+          margin-right: 15px;
+          font-size: 15px;
+          cursor: pointer; }
+          .profile__info--user-follow-container span {
+            margin-right: 5px;
+            color: #8899a6; }
+          .profile__info--user-follow-container .follow-count {
+            font-weight: 800;
+            color: #eee; }
+          .profile__info--user-follow-container:hover span {
+            text-decoration-line: underline; }
+  .profile__filter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex-shrink: 1;
+    flex-grow: 1;
+    height: 100%;
+    border-bottom: solid 1px #4b4f52; }
+    .profile__filter--item {
+      display: flex;
+      flex-grow: 1;
+      padding: 15px;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background-color 0.2s ease; }
+      .profile__filter--item:hover {
         background-color: azure; }
 
 .sidebar {

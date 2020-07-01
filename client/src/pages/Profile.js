@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 import { getUserProfileData } from '../modules/actions'
 
@@ -25,22 +26,30 @@ function Profile(props) {
           </div>
           <div className="profile__info--user">
             <div className="profile__info--user-name">
-              {props.user.data.name}
+              {props.user.data.name} {props.user.data.public ? null : (<i class="fas fa-lock"></i>)}
             </div>
             <div className="profile__info--user-username">
               @{props.user.data.username}
             </div>
+            <div className="profile__info--user-createdAt">
+              <i class="far fa-calendar-alt"></i> Joined {moment(props.user.data.createdAt).format('MMMM YYYY')}
+            </div>
             <div className="profile__info--user-follow">
-              <div className="profile__info--user-follow-following">
-                <span>{props.user.data.following.length}</span>
+              <div className="profile__info--user-follow-container">
+                <span className="follow-count">{props.user.data.following.length}</span><span>Following</span>
               </div>
-              <div className="profile__info--user-follow-followers">
-                <span>{props.user.data.followers.length}</span>
+              <div className="profile__info--user-follow-container">
+                <span className="follow-count">{props.user.data.followers.length}</span><span>Followers</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="profile__filter"></div>
+        <div className="profile__filter">
+          <div className="profile__filter--item">Tweets</div>
+          <div className="profile__filter--item">Replies</div>
+          <div className="profile__filter--item">Media</div>
+          <div className="profile__filter--item">Likes</div>
+        </div>
         <div className="profile__tweets"></div>
       </div>
       <div className="sidebar"></div>

@@ -135,6 +135,7 @@ export const getUserProfileData = (username) => {
               text
               createdAt
             }
+            createdAt
           }
         }`,
       }),

@@ -8,7 +8,8 @@ const INITIAL_STATE = {
     public: null,
     followers: [],
     following: [],
-    tweets: []
+    tweets: [],
+    createdAt: new Date()
   }
 };
 
