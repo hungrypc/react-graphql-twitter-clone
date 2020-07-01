@@ -13,6 +13,21 @@ const User = {
       }
     }
   },
+  tweets: {
+    fragment: 'fragment orderBy on Tweet { createdAt }',
+    resolve(parent, args, { prisma }, info) {
+      const opArgs = {
+        where: {
+          author: {
+            id: parent.id
+          }
+        },
+        orderBy: 'createdAt_DESC'
+      }
+  
+      return prisma.query.tweets(opArgs, info)
+    }
+  }
 }
 
 export { User as default }

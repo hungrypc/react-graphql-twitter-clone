@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
+import Tweet from '../components/Tweet'
 import { getUserProfileData } from '../modules/actions'
 
 function Profile(props) {
@@ -50,7 +51,9 @@ function Profile(props) {
           <div className="profile__filter--item">Media</div>
           <div className="profile__filter--item">Likes</div>
         </div>
-        <div className="profile__tweets"></div>
+        <div className="profile__tweets">
+          {props.user.data.tweets.map(tweet => <Tweet data={tweet}/>)}
+        </div>
       </div>
       <div className="sidebar"></div>
     </div>

@@ -1,7 +1,7 @@
 .App {
   background-color: #111;
-  height: 100vh;
-  width: 100vw; }
+  min-height: 100vh;
+  width: 100%; }
 
 main {
   display: flex;
@@ -152,9 +152,34 @@ a {
       transition: background-color 0.2s ease; }
       .profile__filter--item:hover {
         background-color: azure; }
+  .profile__tweets {
+    display: flex;
+    flex-direction: column; }
 
 .sidebar {
   height: 100%;
   display: flex;
   flex-direction: column;
   border-left: solid 1px #4b4f52; }
+
+.tweet {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 15px;
+  border-bottom: solid 1px #4b4f52; }
+  .tweet__dp {
+    flex-basis: 49px;
+    margin-right: 10px; }
+    .tweet__dp--img {
+      width: 49px;
+      height: 49px;
+      border-radius: 50%;
+      background-color: azure; }
+  .tweet__container {
+    display: flex;
+    flex-direction: row; }
+    .tweet__container--content {
+      margin: 10px 0; }
+    .tweet__container--actions {
+      display: flex;
+      flex-direction: row; }

@@ -1,0 +1,32 @@
+.tweet {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 15px;
+  border-bottom: solid 1px #4b4f52;
+
+  &__dp {
+    flex-basis: 49px;
+    margin-right: 10px;
+
+    &--img {
+      width: 49px;
+      height: 49px;
+      border-radius: 50%;
+      background-color: azure;
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+
+    &--content {
+      margin: 10px 0;
+    }
+
+    &--actions {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}

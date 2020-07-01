@@ -4,8 +4,8 @@ $sub-color: #444;
 
 .App {
   background-color: $bg-color;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
 }
 
 main {

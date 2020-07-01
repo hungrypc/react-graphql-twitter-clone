@@ -23,7 +23,7 @@ const Query = {
     const user = await prisma.query.user({
       where: {
         username: args.username
-      }
+      },
     }, info)
 
     if (!user) {

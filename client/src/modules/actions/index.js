@@ -132,6 +132,7 @@ export const getUserProfileData = (username) => {
               name
             }
             tweets {
+              id
               text
               createdAt
             }

@@ -107,4 +107,9 @@
       }
     }
   }
+
+  &__tweets {
+    display: flex;
+    flex-direction: column;
+  }
 }
