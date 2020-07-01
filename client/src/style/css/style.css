@@ -177,9 +177,30 @@ a {
       background-color: azure; }
   .tweet__container {
     display: flex;
-    flex-direction: row; }
-    .tweet__container--content {
-      margin: 10px 0; }
-    .tweet__container--actions {
+    flex-direction: column; }
+    .tweet__container--header {
       display: flex;
       flex-direction: row; }
+      .tweet__container--header div {
+        margin-right: 8px;
+        font-size: 15px; }
+        .tweet__container--header div:hover:not(:last-child) {
+          cursor: pointer;
+          text-decoration-line: underline; }
+      .tweet__container--header-name {
+        font-weight: 800; }
+      .tweet__container--header-username {
+        color: #8899a6; }
+      .tweet__container--header-createdAt {
+        color: #8899a6; }
+    .tweet__container--content {
+      margin: 10px 0;
+      font-weight: 400; }
+    .tweet__container--actions {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+      width: 425px; }
+      .tweet__container--actions div {
+        display: flex;
+        flex-grow: 1; }

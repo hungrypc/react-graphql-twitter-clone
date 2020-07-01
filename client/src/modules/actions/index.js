@@ -135,6 +135,11 @@ export const getUserProfileData = (username) => {
               id
               text
               createdAt
+              author {
+                id
+                name
+                username
+              }
             }
             createdAt
           }

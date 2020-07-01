@@ -18,15 +18,51 @@
 
   &__container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+
+    &--header {
+      display: flex;
+      flex-direction: row;
+
+      div {
+        margin-right: 8px;
+        font-size: 15px;
+        
+        &:hover:not(:last-child) {
+          cursor: pointer;
+          text-decoration-line: underline;
+        }
+      }
+
+      &-name {
+        font-weight: 800;
+      }
+
+      // refactor this
+      &-username {
+        color: rgb(136, 153, 166);
+      }
+
+      &-createdAt {
+        color: rgb(136, 153, 166);
+      }
+    }
 
     &--content {
       margin: 10px 0;
+      font-weight: 400;
     }
 
     &--actions {
+      margin-top: 10px;
       display: flex;
       flex-direction: row;
+      width: 425px;
+
+      div {
+        display: flex;
+        flex-grow: 1;        
+      }
     }
   }
 }
