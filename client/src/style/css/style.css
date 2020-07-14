@@ -21,6 +21,9 @@ a {
   text-decoration: none !important;
   color: #eee; }
 
+.content {
+  border-right: solid 1px #4b4f52; }
+
 .navbar {
   display: flex;
   flex-grow: 1;
@@ -96,8 +99,9 @@ a {
       height: 38px;
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-between;
       padding: 15px; }
-      .profile__info--dp div {
+      .profile__info--dp-image {
         margin-top: -15%;
         height: 134px;
         width: 134px;
@@ -159,8 +163,10 @@ a {
 .sidebar {
   height: 100%;
   display: flex;
+  flex-basis: auto;
   flex-direction: column;
-  border-left: solid 1px #4b4f52; }
+  border-left: solid 1px #4b4f52;
+  flex-grow: 1; }
 
 .tweet {
   display: flex;
@@ -197,7 +203,7 @@ a {
       margin: 10px 0;
       font-weight: 400; }
     .tweet__container--actions {
-      margin-top: 10px;
+      margin: 5px 0;
       display: flex;
       flex-direction: row;
       width: 425px; }

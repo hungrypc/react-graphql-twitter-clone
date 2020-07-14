@@ -21,11 +21,15 @@ main {
     width: 990px;
     height: 100%;
     display: grid;
-    grid-template-columns: 600px 1fr;
+    grid-template-columns: 600px 1fr;    
   }
 }
 
 a {
   text-decoration: none !important;
   color: $main-color;
+}
+
+.content {
+  border-right: solid 1px #4b4f52;
 }

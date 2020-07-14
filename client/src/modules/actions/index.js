@@ -148,7 +148,7 @@ export const getUserProfileData = (username) => {
     })
     .then(res => res.json())
     .then(resJson => {
-      console.log(resJson)
+      // console.log(resJson)
       if (resJson.errors) {
         throw new Error('user not found')  
       } else {

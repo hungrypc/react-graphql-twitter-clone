@@ -1,6 +1,8 @@
 .sidebar {
   height: 100%;
   display: flex;
+  flex-basis: auto;
   flex-direction: column;
-  border-left: solid 1px #4b4f52;;
+  border-left: solid 1px #4b4f52;
+  flex-grow: 1;
 }

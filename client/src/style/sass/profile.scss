@@ -22,15 +22,20 @@
       height: 38px;
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-between;
       padding: 15px;
       
-      div {
+      &-image {
         margin-top: -15%;
         // margin: 4px;
         height: 134px;
         width: 134px;
         border-radius: 50%;
         background-color: azure;
+      }
+
+      &-actions {
+
       }
     }
 
