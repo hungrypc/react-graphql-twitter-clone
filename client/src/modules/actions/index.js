@@ -164,7 +164,7 @@ export const getUserProfileData = (username) => {
 
 /////////////////////////// USER ///////////////////////////
 
-export const followUser = (toBeFollowedId) => {
+export const followUser = (toBeFollowedId, toBeFollowedUsername) => {
   return async (dispatch) => {
     const token = localStorage.getItem('auth_token')
     await fetch(api, {
@@ -182,11 +182,12 @@ export const followUser = (toBeFollowedId) => {
     .then(resJson => {
       console.log(resJson)
       dispatch(me())
+      dispatch(getUserProfileData(toBeFollowedUsername))
     })
   }
 }
 
-export const unfollowUser = (toBeUnfollowedId) => {
+export const unfollowUser = (toBeUnfollowedId, toBeUnfollowedUsername) => {
   return async (dispatch) => {
     const token = localStorage.getItem('auth_token')
     await fetch(api, {
@@ -204,6 +205,7 @@ export const unfollowUser = (toBeUnfollowedId) => {
     .then(resJson => {
       console.log(resJson)
       dispatch(me())
+      dispatch(getUserProfileData(toBeUnfollowedUsername))
     })
   }
 }

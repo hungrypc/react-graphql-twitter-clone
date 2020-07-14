@@ -13,7 +13,7 @@ function ProfileActions(props) {
       return (
         <div 
           className="profile-actions__following-btn"
-          onClick={() => dispatch(unfollowUser(props.user.id))}
+          onClick={() => dispatch(unfollowUser(props.user.id, props.user.username))}
         >
           Following
         </div>
@@ -22,7 +22,7 @@ function ProfileActions(props) {
       return (
       <div 
         className="profile-actions__primary-btn"
-        onClick={() => dispatch(followUser(props.user.id))}
+        onClick={() => dispatch(followUser(props.user.id, props.user.username))}
       >
         Follow
       </div>
