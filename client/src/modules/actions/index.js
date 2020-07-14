@@ -161,3 +161,49 @@ export const getUserProfileData = (username) => {
     .catch(console.error);
   }
 }
+
+/////////////////////////// USER ///////////////////////////
+
+export const followUser = (toBeFollowedId) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem('auth_token')
+    await fetch(api, {
+      ...opt(token),
+      body: JSON.stringify({
+        query: `mutation {
+          followUser(id: "${toBeFollowedId}") {
+            id
+            username
+          }
+        }`,
+      }),
+    })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson)
+      dispatch(me())
+    })
+  }
+}
+
+export const unfollowUser = (toBeUnfollowedId) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem('auth_token')
+    await fetch(api, {
+      ...opt(token),
+      body: JSON.stringify({
+        query: `mutation {
+          unfollowUser(id: "${toBeUnfollowedId}") {
+            id
+            username
+          }
+        }`,
+      }),
+    })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson)
+      dispatch(me())
+    })
+  }
+}
