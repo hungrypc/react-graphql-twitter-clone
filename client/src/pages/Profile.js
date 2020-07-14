@@ -65,7 +65,7 @@ function Profile(props) {
 
   useEffect(() => {
     props.getUserProfileData(props.match.params.username)
-  }, [])
+  }, [props.match.params.username])
 
   return (
     <div className="page">

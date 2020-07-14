@@ -35,7 +35,34 @@
       }
 
       &-actions {
+        
+        div {
+          display: flex;
+          font-size: 15px;
+          font-weight: 600;
+          height: 37px;
+          min-width: calc(62.79px);
+          padding: 0 15px;
+          border: 1px solid #eee;
+          border-radius: 9999px;
+          justify-content: center;
+          align-items: center;
+          line-height: 1;
+          cursor: pointer;          
+        }
 
+        .profile-actions {
+          &__primary-btn {
+            &:hover {
+              background-color: rgba(238, 238, 238, .1);
+            }
+          }
+
+          &__following-btn {
+            color: #111;
+            background-color: #eee;
+          }
+        }
       }
     }
 
