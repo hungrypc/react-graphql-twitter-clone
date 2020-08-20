@@ -1,8 +1,11 @@
+import jwt from 'jsonwebtoken'
 import {
   SIGN_IN, SIGN_OUT, ME,
   NO_TOKEN,
   GET_PROFILE_DATA
 } from './types'
+
+// const token = jwt.sign({ secret: process.env.REACT_APP_PRISMA_SECRET }, )
 
 const api = process.env.REACT_APP_API_URL
 const opt = (token = process.env.REACT_APP_PRISMA_TOKEN) => {
